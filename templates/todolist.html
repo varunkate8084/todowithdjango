@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/static/todolist.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<title>Main Page</title>
+</head>
+<body class="body">
+    <div class="mainbox">
+		<div class="headingbox">
+			<center><font class="todofont">ToDo List <span style="color:#e5322d;font-size:13px">({{count}} Work are In-Complete)</span></font><a href="http://127.0.0.1:8000/mainpagetodo/"> <i  class="material-icons add">add</i></a></center>
+		</div>
+		<table class="table table-striped">
+			<thead>
+			   <tr>
+				   <th>Status</th>
+				   <th scope="col">ID</th>
+				   <th scope="col">Date</th>
+				   <th scope="col">Work</th>
+				   <center><th scope="col">Edit/Delete</th></center>
+			   </tr>
+			</thead>
+			<tbody>
+<!--	Table Row In Loop	start	-->
+			   {% for row in records %}
+			   <tr>
+				  <th>{{row.status}}</th>
+				  <th scope="row">{{ row.workid }}</th>
+				  <td>{{ row.date }}</td>
+				  <td>{{ row.work }}</td>
+				  <td><a style="color:white;" class="btn1  modal-trigger editdltbtn" wid="{{row.workid}}" wname="{{row.work}}" wdate="{{row.date}}" wstatus="{{row.status}}" href="#modal1" >Edit/Delete</a></td>
+			   </tr>
+			   {% endfor %}
+	<!--	Table Row In Loop End	-->
+			</tbody>
+		</table>
+	</div>
+
+<!--Modal For Edit Work Start-->
+
+  <div id="modal1" class="modal" style="width:60%;">
+	  <div class="col-md-12">
+<input type="hidden" id="workid">
+    				<div class="mainbox1">
+    					<div class="headingbox">
+							<center><font class="todofont">Edit Your Work</font></center>
+    					</div>
+                            <label class="label" >Enter Your Work :</label>
+                            <textarea class="form-control" name="workname" id="workname" rows="1"></textarea>
+
+                            <label class="label ">Date :</label>
+                            <input required id="workdate" style="border: 1px solid #ced4da;border-radius: 0.25rem;"  type="date" class="form-control" name="workdate">
+
+                            <label class="label">Status :</label>
+                            <select name="workstatus" id="workstatus" class="form-control ">
+                                <option>---select---</option>
+                                <option value="In-Complete">In-Complete</option>
+                                <option value="Complete">Complete</option>
+                            </select>
+<!--						Edit Delete Buttons   -->
+						<div class="btns">
+							<button type="button" style="color:white;margin-left: 20%; background-color:dodgerblue;" class="btn1 editbtn">Edit
+							<i style="font-size:16px" class="material-icons right">edit</i>
+							</button>
+
+							<button type="button" style="color:white;float:right; margin-right: 20%; background-color:dodgerblue;" class="btn1 dltbtn">Remove
+							<i style="font-size:16px" class="material-icons right">delete</i>
+							</button>
+						</div>
+<!--						Footer close btn     -->
+						<div>
+							 <a style="float:right; text-decoration:none" class="modal-close waves-effect waves-green closebtn btn-flat">Close</a>
+						</div>
+
+                            <!-- Indication Text-->
+                             <div class="col s12 btnrow">
+                                   <div id="message" class="msgstyle"></div>
+                              </div>
+    				</div>
+    			</div>
+  </div>
+<!--Modal For Edit Work End -->
+
+</body>
+<script type="text/javascript"src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.modal').modal();
+
+
+
+
+     $('.editdltbtn').click(function(){
+<!--  Alerts to Check the DATA     -->
+              alert($(this).attr('wname'))
+<!--              alert($(this).attr('wid'))-->
+<!--              alert($(this).attr('wstatus'))-->
+<!--                  alert($(this).attr('wdate'))-->
+<!--            Change the format of data      -->
+                  var first_date = moment($(this).attr('wdate')).format('YYYY-MM-DD');
+<!--                  alert(first_date);-->
+              $('#message').html(' ')
+              $('#workname').val($(this).attr('wname'))
+              $('#workid').val($(this).attr('wid'))
+              $('#workdate').val(first_date)
+              $('#workstatus').val($(this).attr('wstatus'))
+            })
+<!--     Actions after Clicking        -->
+  $('.editbtn').click(function(){
+<!--              alert("Enter In edit dlt modal")-->
+                $.getJSON('/editworklisttodo',{workid:$('#workid').val(),workdate:$('#workdate').val(),workname:$('#workname').val(),workstatus:$('#workstatus').val()},function(data){
+
+                   if(data.result)
+                   {$('#message').html('Work Edited Successfully.....')}
+                   else
+                   {$('#message').html('Faild To Edit Work.......')}
+                })
+                })
+   $('.dltbtn').click(function(){
+   alert("Work Deleted Successfully")
+              $.getJSON('/deleteworkapi',{ workid:$('#workid').val() },function(data){
+<!--                 alert("Inside JSON ")-->
+                if(data.result)
+                {$('#message').html('Work Deleted Successfully........')}
+                else
+                {$('#message').html('Faild to Delete Work............')}
+<!--                alert("Kate") }-->
+              })
+   })
+
+
+    $('.closebtn').click(function(){
+              window.location.reload('http://localhost:8000/displaywork/')
+            })
+});
+
+
+
+</script>
+</html>

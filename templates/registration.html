@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="/static/reglogin.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link href="registration.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Registration </h2>
+<div class="form-conteniar">
+            <form method="POST" action="/submitregistrationapi" enctype="multipart/form-data">{% csrf_token %}
+                <div class="input-name">
+                    <i class="material-icons lock">account_circle</i>
+                    <input type="text" placeholder="First Name" class="name" name="firstname">
+                    <span class="last">
+                    <i class="material-icons lock">account_circle</i>
+                    <input type="text" placeholder="Last Name" class="name" name="lastname">
+                    </span>
+                </div>
+                <div class="input-name">
+                    <i class="material-icons lock">account_circle</i>
+                    <input type="email" placeholder="E-mail" class="text-name" name="email">
+                </div>
+                <div class="input-name">
+                    <i class="fa fa-lock lock"></i>
+                    <input type="password" placeholder="Password" class="text-name" name="password">
+                </div>
+                <div class="input-name">
+                    <i class="fa fa-lock lock"></i>
+                    <input type="password" placeholder="Re-type Password" class="text-name" name="cpassword">
+                </div>
+                <div class="input-name">
+                    <i class="material-icons lock">local_phone</i>
+                    <input type="Phone" placeholder="Phone Number" required class="text-name" name="phone">
+                </div>
+                <div class="input-name">
+                    <input class="button" type="submit" value="Register" />
+                    <a style="margin-left:45%;"  href="http://localhost:8000/logintodo/">LogIn</a>
+                </div>
+                <div style="margin-left:30%;">{{message}}</div>
+
+</form>
+</div>
+</div>
+</body>
+</html>

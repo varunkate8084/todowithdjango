@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/todolist.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Your ToDo List</title>
+</head>
+<body class="body">
+      <div class="container-fluid">
+    	<div class="container">
+    		<div class="row">
+
+    			<div class="col-md-12">
+                    <!-- Main Box Start               -->
+    				<div class="mainbox">
+    					<div class="headingbox">
+                            <a style="color:white; text-decoration:none; float:right" href="http://localhost:8000/logout/">LogOut</a><a style="float:left" href="http://127.0.0.1:8000/displayworktodo/"><i  class="material-icons add">list</i></a>
+    					   <center><font class="todofont">Add Your Work</font></center>
+                            <center><font class="todofont">{{data.firstname}}{{data.lastname}}</font></center>
+    					</div>
+    					<form action="/submitworkapi" method="post" class="form-group" enctype="multipart/form-data">{% csrf_token %}
+                            <label class="label" >Enter Your Work :</label>
+                            <textarea class="form-control" name="work" rows="1"></textarea>
+
+                            <label class="label">Date :</label>
+                            <input type="Date" class="form-control" id="" name="date">
+
+                            <label class="label">Status :</label>
+                            <select name="status" id="ststus" class="form-control">
+                                <option>---select---</option>
+                                <option value="In-Complete">In-Complete</option>
+                                <option value="Complete">Complete</option>
+                            </select>
+
+                            <input  type="submit" value="Submit" class="btn-primary btn">
+<!--Indication Message-->
+                            <center><font class="success">{{message}}</font></center>
+                        </form>
+    				</div>
+    			</div>
+            </div>
+        </div>
+      </div>
+</body>
+</html>

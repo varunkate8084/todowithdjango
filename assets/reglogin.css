@@ -1,0 +1,148 @@
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+ font-family: Verdana, Geneva, sans-serif;
+ font-size: 14px;
+ background:#219cd6;
+}
+.wrapper {
+    background-color: #fff;
+    width:500px;
+    padding: 25px;
+    margin: 30px auto 0;
+    /*border-top: 5px solid #28a7e3;
+    border-bottom: 5px solid #28a7e3;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;*/
+    /*border-radius: 25px;*/
+
+
+
+}
+.wrapper h2{
+    font-size: 24px;
+    line-height: 24px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.input-name{
+    width: 90%;
+    position: relative;
+    margin: 20px auto;
+
+}
+.lock{
+    padding:8px 7px;
+    background-color: #11a0e3;
+    color: white;
+}
+.name{
+    width: 45%;
+    padding:8px 0 8px 40px;
+}
+.input-name span{
+    margin-left: 35px;
+}
+.text-name{
+    width: 100%;
+    padding:8px 0 8px 40px;
+}
+.input-name i{
+    position: absolute;
+    font-size: 18px;
+    border-right: 1px solid #cccccc;
+}
+.email{
+    padding: 8px;
+}
+.text-name, .name{
+    border: 1px solid #cccccc;
+    outline: none;
+    -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      transition: all 0.30s ease-in-out;
+}
+.text-name:hover, .name:hover{
+    background-color: #fafafa;
+}
+.text-name:focus, .name:focus{
+    -webkit-box-shadow: 0 0 2px 1px #28a7e3;
+      -moz-box-shadow: 0 0 2px 1px #28a7e3;
+      box-shadow: 0 0 2px 1px #28a7e3
+      border: 1px solid #28a7e3;
+      background: #fafafa;
+}
+
+
+@-webkit-keyframes check {
+    0% { height: 0; width: 0; }
+    25% { height: 0; width: 7px; }
+    50% { height: 20px; width: 7px; }
+  }
+
+  @keyframes check {
+    0% { height: 0; width: 0; }
+    25% { height: 0; width: 7px; }
+    50% { height: 20px; width: 7px; }
+  }
+  .button{
+    background:#28a7e3;
+    height: 35px;
+    line-height: 35px;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-weight: bolder;
+    cursor: pointer;
+    color: #fff;
+    font-size: 18px;
+
+    margin-bottom: 10px;
+    margin-top: 10px;
+  /*  border-radius: 30px;*/
+
+  }
+  .button:hover{
+      background-color: #11a0e3;
+
+
+  }
+
+  @media (max-width: 480px) {
+      .wrapper{
+          width: 100%;
+      }
+      .input-name{
+          margin-bottom: -10px;
+      }
+      .name{
+          width: 100%;
+          padding:8px 0 8px 40px;
+          margin-bottom: 10px;
+      }
+      .input-name span{
+          padding: 0;
+          margin:0;
+      }
+    }
+    input[type=file]::file-selector-button {
+        margin-right: 20px;
+        border: none;
+        background: #219cd6;
+        padding: 1px 5px;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        transition: background .2s ease-in-out;
+      }
+
+      input[type=file]::file-selector-button:hover {
+        background: #219cd6;
+      }
+
+/*Css For login.html   */
+
